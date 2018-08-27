@@ -5,15 +5,15 @@ import exception.ZeroNumberException;
 
 public class TriangleArea {
 
-	public double heron(double a, double b, double c) {
+	public double calculateForHeron(double a, double b, double c) {
 		double s = (a + b + c) / 2;
 		double S = (double)Math.sqrt(s * (s - a) * (s - b) * (s - c));
 		S = (int)(S * 1000) / 1000d;
 		return S;
 	}
 
-	public void printTri(double a, double b, double c) {
-		double s = heron(a, b, c);
+	public void printTriangleArea(double a, double b, double c) {
+		double s = calculateForHeron(a, b, c);
 		System.out.println(s);
 	}
 
@@ -48,6 +48,6 @@ public class TriangleArea {
 		}
 		TriangleArea tri = new TriangleArea();
 
-		tri.printTri(a, b, c);
+		tri.printTriangleArea(a, b, c);
 	}
 }

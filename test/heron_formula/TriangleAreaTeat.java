@@ -30,7 +30,7 @@ public class TriangleAreaTeat {
 
 				@Test
 				public void 引数として2_5_4が入力された場合() throws Exception {
-					double actual = tri.heron(2, 5, 4);
+					double actual = tri.calculateForHeron(2, 5, 4);
 					double expected = 3.799;
 
 					assertThat(actual, is(expected));
@@ -47,7 +47,7 @@ public class TriangleAreaTeat {
 
 				@Test
 				public void 引数として8_5__9_25__11_5が入力された場合() throws Exception {
-					double actual = tri.heron(8.5, 9.25, 11.5);
+					double actual = tri.calculateForHeron(8.5, 9.25, 11.5);
 					double expected = 38.789;
 
 					assertThat(actual, is(expected));
@@ -55,7 +55,7 @@ public class TriangleAreaTeat {
 
 				@Test
 				public void 引数として8_5__9__11が入力された場合() throws Exception {
-					double actual = tri.heron(8.5, 9, 11);
+					double actual = tri.calculateForHeron(8.5, 9, 11);
 					double expected = 37.390;
 
 					assertThat(actual, is(expected));
@@ -64,7 +64,7 @@ public class TriangleAreaTeat {
 
 				@Test
 				public void 引数として8_5__9_25__11が入力された場合() throws Exception {
-					double actual = tri.heron(8.5, 9.25, 11);
+					double actual = tri.calculateForHeron(8.5, 9.25, 11);
 					double expected = 38.220;
 
 					assertThat(actual, is(expected));
@@ -73,7 +73,7 @@ public class TriangleAreaTeat {
 
 				@Test
 				public void 引数として8_5__9__11_5が入力された場合() throws Exception {
-					double actual = tri.heron(8.5, 9, 11.5);
+					double actual = tri.calculateForHeron(8.5, 9, 11.5);
 					double expected = 37.887;
 
 					assertThat(actual, is(expected));
@@ -82,7 +82,7 @@ public class TriangleAreaTeat {
 
 				@Test
 				public void 引数として8__9_25__11が入力された場合() throws Exception {
-					double actual = tri.heron(8, 9.25, 11);
+					double actual = tri.calculateForHeron(8, 9.25, 11);
 					double expected = 36.304;
 
 					assertThat(actual, is(expected));
@@ -91,7 +91,7 @@ public class TriangleAreaTeat {
 
 				@Test
 				public void 引数として8__9_25__11_5が入力された場合() throws Exception {
-					double actual = tri.heron(8, 9.25, 11.5);
+					double actual = tri.calculateForHeron(8, 9.25, 11.5);
 					double expected = 36.745;
 
 					assertThat(actual, is(expected));
@@ -116,7 +116,7 @@ public class TriangleAreaTeat {
 
 				@Test
 				public void 整数を渡すと三角形の面積を出力する() {
-					tri.printTri(2, 5, 4);
+					tri.printTriangleArea(2, 5, 4);
 					String actual = out.toString();
 					String expected = "3.799" + System.lineSeparator();
 
@@ -137,7 +137,7 @@ public class TriangleAreaTeat {
 
 				@Test
 				public void 引数として8_5__9_25__11_5が入力された場合(){
-					tri.printTri(8.5, 9.25, 11.5);
+					tri.printTriangleArea(8.5, 9.25, 11.5);
 					String actual = out.toString();
 					String expected = "38.789" + System.lineSeparator();
 
@@ -145,7 +145,7 @@ public class TriangleAreaTeat {
 				}
 
 				public void 引数として8_5__9__11が入力された場合(){
-					tri.printTri(8.5, 9, 11);
+					tri.printTriangleArea(8.5, 9, 11);
 					String actual = out.toString();
 					String expected = "37.390" + System.lineSeparator();
 
@@ -154,7 +154,7 @@ public class TriangleAreaTeat {
 
 
 				public void 引数として8_5__9_25__11が入力された場合(){
-					tri.printTri(8.5, 9.25, 11);
+					tri.printTriangleArea(8.5, 9.25, 11);
 					String actual = out.toString();
 					String expected = "38.220" + System.lineSeparator();
 
@@ -163,7 +163,7 @@ public class TriangleAreaTeat {
 
 
 				public void 引数として8_5__9__11_5が入力された場合(){
-					tri.printTri(8.5, 9, 11.5);
+					tri.printTriangleArea(8.5, 9, 11.5);
 					String actual = out.toString();
 					String expected = "37.887" + System.lineSeparator();
 
@@ -172,7 +172,7 @@ public class TriangleAreaTeat {
 
 
 				public void 引数として8__9_25__11が入力された場合(){
-					tri.printTri(8, 9.25, 11);
+					tri.printTriangleArea(8, 9.25, 11);
 					String actual = out.toString();
 					String expected = "36.304" + System.lineSeparator();
 
@@ -181,7 +181,7 @@ public class TriangleAreaTeat {
 
 
 				public void 引数として8__9_25__11_5が入力された場合(){
-					tri.printTri(8, 9.25, 11.5);
+					tri.printTriangleArea(8, 9.25, 11.5);
 					String actual = out.toString();
 					String expected = "36.745" + System.lineSeparator();
 
@@ -504,6 +504,7 @@ public class TriangleAreaTeat {
 					assertThat(actual, is(expected));
 				}
 			}
+
 		}
 
 		public static class 三角形の成立条件を満たさなかった場合エラー文を出力する {
@@ -535,6 +536,107 @@ public class TriangleAreaTeat {
 				assertThat(actual, is(expected));
 			}
 
+		}
+
+		public static class NaNが入力された場合_数字を入力してください_と出力する {
+			private ByteArrayOutputStream out;
+
+			@Before
+			public void setUp() {
+				out = new ByteArrayOutputStream();
+				System.setOut(new PrintStream(out));
+			}
+
+			@Test
+			public void _Double_NaNが3つ入力された場合() throws Exception {
+				String[] input = {"Double.NaN", "Double.NaN", "Double.NaN"};
+				TriangleArea.main(input);
+				String actual0 = out.toString();
+				String expected = "数字を入力してください" + System.lineSeparator();
+
+				assertThat(actual0, is(expected));
+			}
+
+			@Test
+			public void 第一引数としてDouble_NaNが入力された場合() throws Exception {
+				String[] input = {"Double.NaN", "1", "1"};
+				TriangleArea.main(input);
+				String actual0 = out.toString();
+				String expected = "数字を入力してください" + System.lineSeparator();
+
+				assertThat(actual0, is(expected));
+			}
+
+			@Test
+			public void 第二引数としてDouble_NaNが入力された場合() throws Exception {
+				String[] input = {"1", "Double.NaN", "1"};
+				TriangleArea.main(input);
+				String actual0 = out.toString();
+				String expected = "数字を入力してください" + System.lineSeparator();
+
+				assertThat(actual0, is(expected));
+			}
+
+			@Test
+			public void 第三引数としてDouble_NaNが入力された場合() throws Exception {
+				String[] input = {"1", "1", "Double.NaN"};
+				TriangleArea.main(input);
+				String actual0 = out.toString();
+				String expected = "数字を入力してください" + System.lineSeparator();
+
+				assertThat(actual0, is(expected));
+			}
+
+		}
+
+		public class Infinityが入力された場合_数字を入力してください_と出力する {
+			private ByteArrayOutputStream out;
+
+			@Before
+			public void setUp() {
+				out = new ByteArrayOutputStream();
+				System.setOut(new PrintStream(out));
+			}
+
+			@Test
+			public void Double_POSITIVE_INFINITYが３つ入力された場合() throws Exception {
+				String[] input = {"Double.POSITIVE_INFINITY", "Double.POSITIVE_INFINITY", "Double.POSITIVE_INFINITY"};
+				TriangleArea.main(input);
+				String actual = out.toString();
+				String expected = "数字を入力してください" + System.lineSeparator();
+
+				assertThat(actual, is(expected));
+			}
+
+			@Test
+			public void 第一引数としてDouble_POSITIVE_INFINITYが入力された場合() throws Exception {
+				String[] input = {"Double.POSITIVE_INFINITY", "1", "1"};
+				TriangleArea.main(input);
+				String actual = out.toString();
+				String expected = "数字を入力してください" + System.lineSeparator();
+
+				assertThat(actual, is(expected));
+			}
+
+			@Test
+			public void 第二引数としてDouble_POSITIVE_INFINITYが入力された場合() throws Exception {
+				String[] input = {"1", "Double.POSITIVE_INFINITY", "1"};
+				TriangleArea.main(input);
+				String actual = out.toString();
+				String expected = "数字を入力してください" + System.lineSeparator();
+
+				assertThat(actual, is(expected));
+			}
+
+			@Test
+			public void 第三引数としてDouble_POSITIVE_INFINITYが入力された場合() throws Exception {
+				String[] input = {"1", "1", "Double.POSITIVE_INFINITY"};
+				TriangleArea.main(input);
+				String actual = out.toString();
+				String expected = "数字を入力してください" + System.lineSeparator();
+
+				assertThat(actual, is(expected));
+			}
 		}
 	}
 }
